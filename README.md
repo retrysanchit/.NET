@@ -1,64 +1,177 @@
 # .NET
 .NET simplifies development by combining batteries-included tooling, streamlined project setup, and strong defaults in a single ecosystem.
 
-## Topics to Cover
+# .NET CLI — Quick Reference
 
-### 1\. C# Language Basics
+The .NET CLI is used to create, build, run, test, and publish .NET applications.
 
-- [ ] C# language history and evolution
-- [ ] C# syntax and keywords
-- [ ] Basic program structure
-- [ ] Input/output (I/O) operations
-- [ ] Comments and documentation
+**Syntax:**
 
-### 2\. Data Types, Variables, and Operators
+bash
 
-- [ ] Value types and reference types
-- [ ] Variable declaration and initialization
-- [ ] Operators and their types
-- [ ] Type casting and type conversion
+```bash
+dotnet <command> [arguments] [options]
+```
 
-### 3\. Control Flow Statements
+## 1\. Project Management
 
-- [ ] Selection statements (`if`, `else`, `switch`)
-- [ ] Iteration statements (`for`, `while`, `do-while`, `foreach`)
-- [ ] Jump statements (`break`, `continue`, `return`, `goto`)
+| Command | Description |
+| --- | --- |
+| `dotnet new console -n MyApp` | Create console project |
+| `dotnet new classlib -n MyLib` | Create class library |
+| `dotnet new webapi -n MyApi` | Create Web API project |
+| `dotnet sln add MyApp/MyApp.csproj` | Add project to solution |
+| `dotnet sln list` | List solution projects |
+| `dotnet sln remove MyApp/MyApp.csproj` | Remove project from solution |
 
-### 4\. Object-Oriented Programming (OOP)
+## 2\. Build & Execution
 
-- [ ] Introduction to OOP concepts
-- [ ] Classes and objects
-- [ ] Inheritance
-- [ ] Polymorphism
-- [ ] Encapsulation
-- [ ] Abstraction
-- [ ] Methods and properties
-- [ ] Indexers
+| Command | Description |
+| --- | --- |
+| `dotnet build` | Compile project |
+| `dotnet build -c Release` | Build in Release mode |
+| `dotnet run` | Build and execute |
+| `dotnet run --no-build` | Run without building |
+| `dotnet clean` | Remove build outputs (`bin/`, `obj/`) |
+| `dotnet watch run` | Watch files and rerun on changes |
 
-### 5\. Exception Handling
+**Notes:**
 
-- [ ] Introduction to exceptions
-- [ ] Exception handling with `try`, `catch`, and `finally`
-- [ ] Throwing exceptions
-- [ ] Creating custom exceptions
-- [ ] Understanding exception hierarchies
+- `build`: Compile and check errors without executing.
+- `run`: Builds if necessary, then executes.
+- `clean`: Removes generated build outputs.
+- `Release`: Optimized build configuration; `Debug` is the default.
 
-## Completion Criteria
+## 3\. Dependencies & NuGet
 
-- [ ] All listed topics have been studied and understood.
-- [ ] Practical C# examples have been implemented for each major concept.
-- [ ] Relevant code examples are organized and documented.
-- [ ] Exercises or small programs have been completed to reinforce understanding.
-- [ ] Code has been tested and reviewed.
-- [ ] Unit 2 learning objectives have been covered.
+| Command | Description |
+| --- | --- |
+| `dotnet restore` | Restore NuGet dependencies |
+| `dotnet add package PackageName` | Add NuGet package |
+| `dotnet add package PackageName --version 1.0.0` | Add specific version |
+| `dotnet remove package PackageName` | Remove package |
+| `dotnet list package` | List installed packages |
+| `dotnet add reference ../MyLib/MyLib.csproj` | Add project reference |
 
-## Expected Outcome
+Restore usually happens automatically during build/run.
 
-By completing this unit, I should be able to:
+## 4\. Testing & Publishing
 
-- Write and understand basic C# programs.
-- Perform input/output operations and document code.
-- Implement program logic using control flow statements.
-- Apply fundamental OOP concepts in C#.
-- Work with methods, properties, and indexers.
-- Handle built-in and custom exceptions effectively.
+| Command | Description |
+| --- | --- |
+| `dotnet test` | Run tests |
+| `dotnet publish -c Release` | Prepare application for deployment |
+| `dotnet publish -c Release -o ./publish` | Publish to specified directory |
+| `dotnet pack -c Release` | Create NuGet package |
+
+## 5\. Utilities
+
+| Command | Description |
+| --- | --- |
+| `dotnet format` | Format source code |
+| `dotnet format --verify-no-changes` | Check formatting |
+| `dotnet --version` | Show SDK version |
+| `dotnet --info` | Show environment information |
+| `dotnet --list-sdks` | List installed SDKs |
+| `dotnet --list-runtimes` | List installed runtimes |
+| `dotnet sdk check` | Check SDK updates |
+| `dotnet --help` | General CLI help |
+
+## 6\. Command-Line Arguments (C#)
+
+Arguments are received through `string[] args` in the application entry point.
+
+**Program.cs**
+
+csharp
+
+```csharp
+foreach (string arg in args)
+{
+    Console.WriteLine(arg);
+}
+```
+
+**Run:**
+
+bash
+
+```bash
+dotnet run -- John 25 Nepal
+```
+
+**Output:**
+
+text
+
+```text
+John
+25
+Nepal
+```
+
+Access individual arguments:
+
+csharp
+
+```csharp
+string name = args[0];
+string age = args[1];
+```
+
+Check argument count before accessing:
+
+csharp
+
+```csharp
+if (args.Length >= 2)
+{
+    Console.WriteLine($"Name: {args[0]}, Age: {args[1]}");
+}
+```
+
+### Understanding `--`
+
+Separates .NET CLI options from application arguments.
+
+bash
+
+```bash
+dotnet run -c Release -- John 25
+```
+
+- `-c Release`: .NET CLI argument.
+- `John 25`: Application arguments.
+
+## 7\. Useful CLI Help
+
+bash
+
+```bash
+dotnet --help
+dotnet <command> --help
+```
+
+Examples:
+
+bash
+
+```bash
+dotnet new --help
+dotnet run --help
+dotnet publish --help
+```
+
+**Everyday workflow:**
+
+bash
+
+```bash
+dotnet new console -n MyApp
+cd MyApp
+code .
+dotnet run
+dotnet build
+```
+
+**Official documentation:** [https://learn.microsoft.com/en-us/dotnet/core/tools/](<https://learn.microsoft.com/en-us/dotnet/core/tools/>)
