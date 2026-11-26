@@ -1,4 +1,4 @@
-[![Hits](https://hits.sh/github.com/retrysanchit/.NET.svg?label=.NET&color=b511cc&logo=csharp)](https://hits.sh/github.com/retrysanchit/.NET/)
+[![Hits](https://hits.sh/github.com/retrysanchit/.NET.svg?label=.NET&color=b511cc&logo=csharp)](https://github.com/retrysanchit/.NET/)
 
 # .NET
 .NET simplifies development by combining batteries-included tooling, streamlined project setup, and strong defaults in a single ecosystem.
